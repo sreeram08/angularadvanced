@@ -1,0 +1,66 @@
+
+<div class="container">
+  <h1 *ngIf="region" class="text-center" style="margin: 40px 0px">
+    {{region | uppercase}} 
+  </h1>
+  <h1 *ngIf="currency" class="text-center" style="margin: 40px 0px">
+       {{currency | uppercase}} 
+  </h1>
+  <h1 *ngIf="language" class="text-center" style="color: whitesmoke;margin: 40px 0px">
+      {{language | uppercase}} 
+  </h1>
+  
+  <a (click)=goback() class="btn btn-success" style="color:white; margin: 2%;">Go Back</a>
+  <div>
+    Filters:
+  <div class="btn-group" style="margin: 2%;" >
+    <button  class="btn btn-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      currency
+    </button>
+    <div class="dropdown-menu">
+      <div *ngFor="let name of countries ">
+        <span *ngFor="let i of name.currencies"><a  [routerLink]="['/countries/currency/',i.code]">{{i.name}}</a><br></span>
+      </div>
+    </div>
+  </div>
+  <div style="margin: 2%" class="btn-group" >
+      <button style="margin: 5%;" class="btn btn-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Langulage
+      </button>
+      <div class="dropdown-menu">
+        <div *ngFor="let name of countries ">
+          <span *ngFor="let i of name.languages"><a  [routerLink]="['/countries/lang/',i.iso639_1]">{{i.name}}</a><br></span>
+        </div>
+      </div>
+    </div>
+</div>
+  <div class="row" >
+         
+
+     <div *ngFor="let name of countries " class="col-md-4">
+
+         <div class="card" style="width: 18rem;margin-top: 5%;">
+          <img class="card-img-top" src="{{name.flag}}" style="width: 70%; height: 60%" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{name.name}}</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Capital:</strong>{{name.capital}}</li>
+            <li class="list-group-item"><strong>Country Code:</strong>{{name.alpha3Code}}</li>
+            <li class="list-group-item"><strong>SubRegion:</strong>{{name.subregion}}</li>
+          </ul>
+          <div class="card-body">
+            <button [routerLink]="['/country/',name.alpha3Code]" type="button" class="btn btn-info">Info</button>
+          </div>
+        </div>
+         
+
+       </div>      
+
+  </div>
+       
+</div>
+
+
+
+
